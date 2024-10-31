@@ -1,10 +1,9 @@
-// identidad atomica: la unidad mas pequeña  de un sistema
+// Identidad a tomica: la unidad mas pequeña de un sistema
 enum FromWho{me, him}
-
 class Message {
-  final String text;
-  final String? imageUrls;
-  final FromWho fromWho;
+final String text;
+final String? imagenUrl;
+final FromWho frowWho;
 
-  Message({required this.text, this.imageUrls, required this.fromWho});
+  Message({required this.text, this.imagenUrl, required this.frowWho}); 
 }

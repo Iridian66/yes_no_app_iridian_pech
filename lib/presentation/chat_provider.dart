@@ -3,8 +3,8 @@ import 'package:yes_no_app_iridian_pech/domain/entities/message.dart';
 
 class ChatProvider extends ChangeNotifier{
   List <Message> messageList =[
-    Message(text:'Hola iridian', fromWho: FromWho.me),
-    Message(text:'¿Lloras porque reprobaste topicos?', fromWho: FromWho.me)
+    Message(text:'Hola iridian', frowWho: FromWho.me),
+    Message(text:'¿Lloras porque reprobaste topicos?', frowWho: FromWho.me)
   ];
 
 
@@ -14,7 +14,7 @@ final ScrollController chatScrollController = ScrollController();
   //Enviar un mensaje 
   Future<void> sendMessage(String text) async {
   // El mensaje 
-  final newMessage = Message(text: text, fromWho: FromWho.me);
+  final newMessage = Message(text: text, frowWho: FromWho.me);
   //Agrega un elemento a la lista ""messageList"
   messageList.add(newMessage);
   //Notifica si algo de provider cambio para que se guarde en el estado 
