@@ -13,10 +13,14 @@ final ScrollController chatScrollController = ScrollController();
 
   //Enviar un mensaje 
   Future<void> sendMessage(String text) async {
-  // El mensaje 
+   // No envia el mensaje si esta vacio 
+    if (text.isEmpty) {
+      return;}  
+  // El mensaje siempre va aser "me" por que yo lo envio 
   final newMessage = Message(text: text, frowWho: FromWho.me);
   //Agrega un elemento a la lista ""messageList"
   messageList.add(newMessage);
+  print("Cantidad de mensajes en la lista: ${messageList.length}");
   //Notifica si algo de provider cambio para que se guarde en el estado 
   notifyListeners();
 
@@ -27,6 +31,7 @@ final ScrollController chatScrollController = ScrollController();
   // Mover el scroll al ultimo mensaje 
 
 Future<void> moveScrollToBottom() async{
+  if (chatScrollController.hasClients) {
   // un pequeño atraso en la animacion para garantizar que siempre 
   // se vera aun cuando se envien mensajes cortos y rapidos 
    await Future.delayed(const Duration(seconds: 1));
@@ -39,6 +44,6 @@ Future<void> moveScrollToBottom() async{
 
     //"rebote" al final de la animacion 
     curve: Curves.easeOut);
-  
+  }
  }
 }
