@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:yes_no_app_iridian_pech/domain/entities/message.dart';
+import 'package:yes_no_app_iridian_pech/infraestructure/models/yes_no_model.dart';
 
 class GetYesNoAnswer {
 
@@ -13,10 +14,14 @@ class GetYesNoAnswer {
 
 //Obtener la respuesta
 Future<Message> getAnswer() async{
-  //Almacenar la peticion GETen una variable 
-  final Response = await _dio.get ('https://yesno.wtf/api');
-  //Generar el error 
-  throw UnimplementedError();
-  
+  //Almacenar la peticion GET en una variable 
+  final response = await _dio.get ('https://yesno.wtf/api');
+
+//Almacenar la data de la respuesta en una variable 
+final yesNoModel = YesNoModel.fromJsonMap(response.data);
+
+
+//Devolver la instancia de "Message" creada en el modelo 
+return yesNoModel.toMessageEntity();
  }
 }
