@@ -9,28 +9,37 @@ class HerMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final colors =Theme.of(context).colorScheme;
+    final colors = Theme.of(context).colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             color: colors.secondary,
             borderRadius: BorderRadius.circular(20)
           ),
           child: Padding(
-            padding: const  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child:Text(message.text, style:const TextStyle(color: Colors.white),),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              message.text,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ),
 
         const SizedBox(height: 5),
 
-         _ImageBubble(imageUrl: message.imagenUrl!,
-         ),
-         const SizedBox(height: 10),
-        // Todo: imagen
+        // Mostrar la imagen si está presente en el mensaje
+        _ImageBubble(imageUrl: message.imagenUrl!),
+
+        const SizedBox(height: 10),
+
+        // Mostrar el timestamp del mensaje
+        Text(
+          message.formattedTimestamp,
+          style: const TextStyle(fontSize: 10, color: Colors.grey),
+        ),
       ],
     );
   }
@@ -41,12 +50,10 @@ class _ImageBubble extends StatelessWidget {
   final String imageUrl;
   const _ImageBubble({required this.imageUrl});
 
-
   @override
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
-
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
@@ -55,19 +62,17 @@ class _ImageBubble extends StatelessWidget {
         width: size.width * 0.7,
         height: 150,
         fit: BoxFit.cover,
-        loadingBuilder:(context, child, loadingProgress) {
-
-          if(loadingProgress == null) return child;
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
 
           return Container(
-            width:size.width * 0.7,
+            width: size.width * 0.7,
             height: 150,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child:const  Text('Mi amor esta enviando una imagen'),
-
+            child: const Text('Mi amor esta enviando una imagen'),
           );
-          
-        } ,
-        ));
+        },
+      ),
+    );
   }
 }

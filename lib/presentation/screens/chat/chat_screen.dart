@@ -19,8 +19,14 @@ class ChatScreen extends StatelessWidget {
             backgroundImage: NetworkImage('https://i.pinimg.com/236x/ed/cc/c1/edccc138e71acf617441f7ee636e3ebc.jpg'),
           ),
         ),
-        title: const Text('Mi amor 😍'),
-        centerTitle: false,
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Mi Amor', style: TextStyle(fontSize: 20),),
+            SizedBox(height: 2,),
+            Text('En linea', style: TextStyle(fontSize: 12,color: Colors.green),)
+          ],
+        ),
       ),
       body: _ChatView(),
     );
@@ -42,12 +48,13 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
+                controller: chatProvider.chatScrollController,
                 itemCount: chatProvider.messageList.length,
                 itemBuilder: (context, index) {
                   // Instancia del message qy¿ue sabra de quien es el mensaje 
                   final message = chatProvider.messageList[index];
 
-                  return(message.frowWho == FromWho.hers)
+                  return(message.fromWho == FromWho.hers)
                       ? HerMessageBubble(message: message,)
                       : MyMessageBubble(message: message,);
 

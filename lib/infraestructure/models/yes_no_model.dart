@@ -6,7 +6,7 @@ import 'package:yes_no_app_iridian_pech/domain/entities/message.dart';
 
 class YesNoModel {
     final String answer;
-    final String forced;
+    final bool forced;
     final String image;
 
     YesNoModel({
@@ -27,9 +27,11 @@ class YesNoModel {
       : answer == 'no'
       ? 'No'
       : 'Quizas',
-       frowWho: FromWho.hers,
+       fromWho: FromWho.hers,
        //Sera el gif 
-       imagenUrl: image);
+       imagenUrl: image, //Esto usara la URL de la imagen
+       timestamp: DateTime.now(), //Agrega la hora actual para el timestamp
+       );
 
 
 
